@@ -56,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: aktifButon == 0 ? (){
                   print("0");
                   setState(() {
-                    aktifButon = (aktifButon + 1) % 2;
+                    aktifButon = (aktifButon + 1) % 3;
                   });
                 } : null,
                 child: Text("0"),
@@ -65,10 +65,19 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: aktifButon == 1 ? (){
                 print("1");
                 setState(() {
-                  aktifButon = (aktifButon + 1) % 2;
+                  aktifButon = (aktifButon + 1) % 3;
                 });
               } : null,
               child: Text("1"),
+            ),
+            ElevatedButton(
+              onPressed: aktifButon == 2 ? (){
+                print("2");
+                setState(() {
+                  aktifButon = (aktifButon + 1) % 3;
+                });
+              } : null,
+              child: Text("2"),
             )
           ],
         ),
