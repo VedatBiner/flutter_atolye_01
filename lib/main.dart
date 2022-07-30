@@ -59,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     aktifButon = (aktifButon + 1) % 3;
                   });
                 } : null,
-                child: Text("0"),
+                child: const Text("0"),
             ),
             ElevatedButton(
               onPressed: aktifButon == 1 ? (){
@@ -68,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   aktifButon = (aktifButon + 1) % 3;
                 });
               } : null,
-              child: Text("1"),
+              child: const Text("1"),
             ),
             ElevatedButton(
               onPressed: aktifButon == 2 ? (){
@@ -77,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   aktifButon = (aktifButon + 1) % 3;
                 });
               } : null,
-              child: Text("2"),
+              child: const Text("2"),
             )
           ],
         ),
