@@ -1,4 +1,5 @@
 // Interaktif deneyim örneği
+// checkbox - state'i biz tutuyoruz.
 
 import 'package:flutter/material.dart';
 
@@ -41,6 +42,8 @@ class _MyHomePageState extends State<MyHomePage> {
     super.didUpdateWidget(oldWidget);
   }
 
+  bool checkliMi = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,15 +54,25 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Checkbox(
+                value: checkliMi,
+                onChanged: (value) {
+                  print(value);
+                  setState(() {
+                    if (value != null) {
+                      checkliMi = value;
+                    }
+                  });
+                }),
             ElevatedButton(
               // aktif buton balısılabilir halde ise 0, değilse null olsun.
-                onPressed: aktifButon == 0 ? (){
-                  print("0");
-                  setState(() {
-                    aktifButon = (aktifButon + 1) % 3;
-                  });
-                } : null,
-                child: const Text("0"),
+              onPressed: aktifButon == 0 ? (){
+                print("0");
+                setState(() {
+                  aktifButon = (aktifButon + 1) % 3;
+                });
+              } : null,
+              child: const Text("0"),
             ),
             ElevatedButton(
               onPressed: aktifButon == 1 ? (){
@@ -85,11 +98,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-
-
-
-
-
-
-
