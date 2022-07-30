@@ -52,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ElevatedButton(
-              // aktif buton balısılabilir halde ise 0, delise null olsun.
+              // aktif buton balısılabilir halde ise 0, değilse null olsun.
                 onPressed: aktifButon == 0 ? (){
                   print("0");
                   setState(() {
