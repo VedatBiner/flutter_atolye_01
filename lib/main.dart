@@ -1,5 +1,5 @@
 // Interaktif deneyim örneği
-// checkbox - state'i biz tutuyoruz.
+// textbox - state'i kendisi tutuyor..
 
 import 'package:flutter/material.dart';
 
@@ -43,6 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   bool checkliMi = false;
+  String text = "";
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +55,16 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            TextField(
+              onChanged: (value) {
+                print(value);
+                setState((){
+                  text = value;
+                  checkliMi = value.length.isEven;
+                });
+              },
+            ),
+            Text(text),
             Checkbox(
                 value: checkliMi,
                 onChanged: (value) {
@@ -98,3 +109,11 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+
+
+
+
+
+
+
