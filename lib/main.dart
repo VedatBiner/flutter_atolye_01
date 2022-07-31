@@ -1,4 +1,5 @@
 // Interaktif deneyim örneği
+// textbox - state'i kendisi tutuyor..
 
 import 'package:flutter/material.dart';
 
@@ -41,6 +42,9 @@ class _MyHomePageState extends State<MyHomePage> {
     super.didUpdateWidget(oldWidget);
   }
 
+  bool checkliMi = false;
+  String text = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,15 +55,35 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            ElevatedButton(
-              // aktif buton balısılabilir halde ise 0, delise null olsun.
-                onPressed: aktifButon == 0 ? (){
-                  print("0");
+            TextField(
+              onChanged: (value) {
+                print(value);
+                setState((){
+                  text = value;
+                  checkliMi = value.length.isEven;
+                });
+              },
+            ),
+            Text(text),
+            Checkbox(
+                value: checkliMi,
+                onChanged: (value) {
+                  print(value);
                   setState(() {
-                    aktifButon = (aktifButon + 1) % 3;
+                    if (value != null) {
+                      checkliMi = value;
+                    }
                   });
-                } : null,
-                child: Text("0"),
+                }),
+            ElevatedButton(
+              // aktif buton balısılabilir halde ise 0, değilse null olsun.
+              onPressed: aktifButon == 0 ? (){
+                print("0");
+                setState(() {
+                  aktifButon = (aktifButon + 1) % 3;
+                });
+              } : null,
+              child: const Text("0"),
             ),
             ElevatedButton(
               onPressed: aktifButon == 1 ? (){
@@ -68,7 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   aktifButon = (aktifButon + 1) % 3;
                 });
               } : null,
-              child: Text("1"),
+              child: const Text("1"),
             ),
             ElevatedButton(
               onPressed: aktifButon == 2 ? (){
@@ -77,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   aktifButon = (aktifButon + 1) % 3;
                 });
               } : null,
-              child: Text("2"),
+              child: const Text("2"),
             )
           ],
         ),
