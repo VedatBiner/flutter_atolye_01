@@ -1,5 +1,7 @@
-// Interaktif deneyim örneği
-// textbox - state'i kendisi tutuyor..
+/*
+Burada yaşam döngüsü örneği
+initstate / didupdate / dispose uygulması bulunuyor.
+ */
 
 import 'package:flutter/material.dart';
 
@@ -36,6 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   int aktifButon = 0;
+  String istenenYazi = "";
 
   @override
   void didUpdateWidget(MyHomePage oldWidget) {
@@ -55,15 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            TextField(
-              onChanged: (value) {
-                print(value);
-                setState((){
-                  text = value;
-                  checkliMi = value.length.isEven;
-                });
-              },
-            ),
+            YaziYazmaYeri(istenenYazi: istenenYazi),
             Text(text),
             Checkbox(
                 value: checkliMi,
@@ -76,11 +71,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   });
                 }),
             ElevatedButton(
-              // aktif buton balısılabilir halde ise 0, değilse null olsun.
+              // aktif buton balısılabilir halde ise 0, delise null olsun.
               onPressed: aktifButon == 0 ? (){
                 print("0");
                 setState(() {
                   aktifButon = (aktifButon + 1) % 3;
+                  istenenYazi = "Sıfır";
                 });
               } : null,
               child: const Text("0"),
@@ -90,6 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 print("1");
                 setState(() {
                   aktifButon = (aktifButon + 1) % 3;
+                  istenenYazi = "Bir";
                 });
               } : null,
               child: const Text("1"),
@@ -99,12 +96,74 @@ class _MyHomePageState extends State<MyHomePage> {
                 print("2");
                 setState(() {
                   aktifButon = (aktifButon + 1) % 3;
+                  istenenYazi = "İki";
                 });
               } : null,
               child: const Text("2"),
             )
           ],
         ),
+      ),
+    );
+  }
+}
+
+class YaziYazmaYeri extends StatefulWidget {
+  final String istenenYazi;
+  const YaziYazmaYeri({
+    Key? key, required this.istenenYazi,
+  }) : super(key: key);
+
+  @override
+  State<YaziYazmaYeri> createState() => _YaziYazmaYeriState();
+}
+
+class _YaziYazmaYeriState extends State<YaziYazmaYeri> {
+
+  late TextEditingController controller = TextEditingController();
+
+  // alternatif olarak initstate ile de olur
+  // bu durumda controller önüne late geliyor.
+
+  // controller yarattık
+  @override
+  void initState() {
+    super.initState();
+    controller = TextEditingController();
+    controller.addListener(() {
+      print("yeni değer : ${controller.text}");
+    });
+  }
+
+  // dispose ile yok etmek gerekiyor. Genel kural
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  void didUpdateWidget(covariant YaziYazmaYeri oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if(oldWidget.istenenYazi != widget.istenenYazi){
+      controller.text = widget.istenenYazi;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: controller,
+      onChanged: (value) {
+        print(value);
+      },
+      decoration: InputDecoration(
+          suffixIcon: IconButton(
+            icon: const Icon(Icons.delete),
+            onPressed: (){
+              controller.text = "";
+            },
+          )
       ),
     );
   }
