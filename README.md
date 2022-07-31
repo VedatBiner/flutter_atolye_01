@@ -1,5 +1,5 @@
 # flutter_atolye_01
-## Google Dijital Atölye Calışmaları\
+## Google Dijital Atölye Calışmaları
 Aktif/pasif Buton Örneği\
 ![ScreenShot](/screen_shots/img-01.png)
 ![ScreenShot](/screen_shots/img-02.png)
